@@ -48,14 +48,14 @@ class APODClass:
 
                 # Display the status code
                 print(
-                    f'\nThe status code for this API request is {response.status_code} \n')
+                    f'\nAPI request status code: {response.status_code} \n')
 
                 # Display the raw JSON data from the API
-                print('The raw data from the API:')
+                print("API raw data:")
                 print(response.text)
 
                 # Display the Python dictionary
-                print('\nThe JSON data converted to a Python dictionary:')
+                print('\nJSON data converted to a Python dictionary:')
 
             return (data.get("explanation"))
 

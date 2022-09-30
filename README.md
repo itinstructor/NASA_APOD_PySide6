@@ -13,10 +13,10 @@ Example project for Intro to Computer Science 1 Think Aloud individual project.
 - Calendar widget chooses that days APOD
 
 ## Version History
-- (09-27-22) V1 Connect to NASA APOD API. Retrieve and display current date APOD description.
+- (09-27-22) V1 Connect to NASA APOD API. Retrieve and display current APOD description.
 
 ## UI Design
-First GUI prototype
+V1 GUI
 
 ![](/images/gui_design_1.png)
 
