@@ -56,10 +56,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.dateEdit)
 
-        self.btn_get_data = QPushButton(self.groupBox)
-        self.btn_get_data.setObjectName(u"btn_get_data")
+        self.btn_display_apod = QPushButton(self.groupBox)
+        self.btn_display_apod.setObjectName(u"btn_display_apod")
 
-        self.horizontalLayout.addWidget(self.btn_get_data)
+        self.horizontalLayout.addWidget(self.btn_display_apod)
 
         self.btn_full_photo = QPushButton(self.groupBox)
         self.btn_full_photo.setObjectName(u"btn_full_photo")
@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
         self.lbl_description.setText("")
         self.lbl_thumbnail.setText("")
         self.groupBox.setTitle("")
-        self.btn_get_data.setText(QCoreApplication.translate("MainWindow", u"Get APOD", None))
+        self.btn_display_apod.setText(QCoreApplication.translate("MainWindow", u"Get APOD", None))
         self.btn_full_photo.setText(QCoreApplication.translate("MainWindow", u"Full Photo", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi

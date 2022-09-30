@@ -4,7 +4,7 @@
     Created: 09-29-2022
     Purpose: 
     Command line to rebuild ui to py
-    pyside6-uic main_window.ui -o main_ui.py
+    pyside6-uic main_window.ui -o ui_main_window.py
 """
 
 import sys
@@ -14,7 +14,7 @@ from PySide6.QtCore import Qt
 # from PySide6 import QtGui
 from PySide6.QtWidgets import QApplication, QMainWindow
 # Import gui py file created by QT Designer
-from main_ui import Ui_MainWindow
+from ui_main_window import Ui_MainWindow
 # Import controller class that does all the work
 from apod_class import APODClass
 
