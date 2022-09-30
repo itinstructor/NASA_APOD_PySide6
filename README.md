@@ -4,15 +4,18 @@ NASA Astronomy Photo of the Day
 
 Example project for Intro to Computer Science 1 Think Aloud individual project.
 
-# Project Plan
-- Design UI
-- Code UI in Pyside6
-- Get current day's APOD
-- Show thumbnail of current APOD
+## Project Plan
+- Design UI in QTDesigner - 09-20-22
+- Convert QT Designer file main_window.ui to main_ui.py - 09-20-22
+- Get and display current day's APOD description - 09-29-22
+- Show thumbnail of current day's APOD
 - Click thumbnail to display larger image
 - Calendar widget chooses that days APOD
 
-# UI Design
+## Version History
+- (09-27-22) V1 Connect to NASA APOD API. Retrieve and display current date APOD description.
+
+## UI Design
 First GUI prototype
 
 ![](/images/gui_design_1.png)
