@@ -15,15 +15,14 @@ IS_DEBUGGING = False
 
 class APODClass:
     def __init__(self):
+        """Class to get NASA APOD data from API"""
         pass
 
-    def get_data(self):
+    def get_data(self, display_date):
+        """Get APOD data from API"""
+        # NASA APOD API URL
+        APOD_URL = "https://api.nasa.gov/planetary/apod"
 
-        URL = "https://api.nasa.gov/planetary/apod"
-
-        # Get date from calendar widget
-        # date = self.calender.get_date()
-        display_date = date.today()
         # Set up parameters for request
         parameters = {
             'api_key': api_key,
@@ -32,7 +31,7 @@ class APODClass:
         # Use the requests.get() function
         # with the parameter of the URL, params, and timeout
         response = requests.get(
-            URL,
+            APOD_URL,
             params=parameters,
             timeout=3
         )

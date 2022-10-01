@@ -1,8 +1,9 @@
 """
-    Name: apog_program.py
+    Name: apod_program.py
     Author: William A Loring
     Created: 09-29-2022
-    Purpose: 
+    Purpose: Get Astronomy Photo of the Day
+    Display as a thumbnail and normal size
     Command line to rebuild ui to py
     pyside6-uic main_window.ui -o ui_main_window.py
 """
@@ -23,20 +24,19 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         super(APODViewer, self).__init__()
-
-        """Initialize PySide6 QT GUI"""
+        """NASA APOD Viewer"""
         # Create the GUI
         self.setupUi(self)
         # Remove title bar
         self.setWindowFlag(Qt.FramelessWindowHint)
         # Get today's date
         display_date = datetime.date.today()
-        # Set dateEdit to today's date
+        # Set dateEdit widget to today's date
         self.dateEdit.setDate(display_date)
         # Create apod object
         self.apod_class = APODClass()
 
-        # Connect the clicked event/signal to the set_weather event handler/slot
+        # Connect the clicked event/signal to the display_data handler/slot
         # Display apod with button or return/enter keys
         self.btn_display_apod.clicked.connect(self.display_data)
         self.btn_display_apod.setShortcut("Return")
@@ -48,10 +48,13 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
 #--------------------- DISPLAY APOD -------------------------------------------#
     def display_data(self):
-        """Get and display APOD description on form label"""
-        # self.apod_class.get_data()
+        """Get and display APOD description and thumbnail on form label"""
+        # Get date from dateEdit widget
+        temp_date = self.dateEdit.date()
+        # Convert QDate to Python date
+        display_date = temp_date.toPython()
         self.lbl_description.setText(
-            f"{self.apod_class.get_data()}")
+            f"{self.apod_class.get_data(display_date)}")
 
 #------------ OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW --------------------#
     def mousePressEvent(self, event):
