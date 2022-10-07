@@ -84,6 +84,12 @@
      <property name="wordWrap">
       <bool>true</bool>
      </property>
+     <property name="margin">
+      <number>5</number>
+     </property>
+     <property name="indent">
+      <number>0</number>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_thumbnail">
      <property name="geometry">
@@ -130,6 +136,13 @@
       <widget class="QPushButton" name="btn_full_photo">
        <property name="text">
         <string>Full Photo</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_hd_photo">
+       <property name="text">
+        <string>HD Photo</string>
        </property>
       </widget>
      </item>

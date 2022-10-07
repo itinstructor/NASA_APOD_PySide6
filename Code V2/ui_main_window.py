@@ -42,6 +42,8 @@ class Ui_MainWindow(object):
         self.lbl_description.setFrameShape(QFrame.Box)
         self.lbl_description.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.lbl_description.setWordWrap(True)
+        self.lbl_description.setMargin(5)
+        self.lbl_description.setIndent(0)
         self.lbl_thumbnail = QLabel(self.groupBox_2)
         self.lbl_thumbnail.setObjectName(u"lbl_thumbnail")
         self.lbl_thumbnail.setGeometry(QRect(604, 30, 225, 225))
@@ -66,6 +68,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.btn_full_photo)
 
+        self.btn_hd_photo = QPushButton(self.groupBox)
+        self.btn_hd_photo.setObjectName(u"btn_hd_photo")
+
+        self.horizontalLayout.addWidget(self.btn_hd_photo)
+
         self.btn_exit = QPushButton(self.groupBox)
         self.btn_exit.setObjectName(u"btn_exit")
 
@@ -86,6 +93,7 @@ class Ui_MainWindow(object):
         self.groupBox.setTitle("")
         self.btn_display_apod.setText(QCoreApplication.translate("MainWindow", u"Get APOD", None))
         self.btn_full_photo.setText(QCoreApplication.translate("MainWindow", u"Full Photo", None))
+        self.btn_hd_photo.setText(QCoreApplication.translate("MainWindow", u"HD Photo", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi
 

@@ -55,6 +55,12 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         display_date = temp_date.toPython()
         self.lbl_description.setText(
             f"{self.apod_class.get_data(display_date)}")
+        
+        img = self.apod_class.get_img()
+        self.lbl_thumbnail.setPixmap(img)
+
+        self.lbl_thumbnail.setScaledContents(True)
+        self.lbl_thumbnail.resize(225, 225)
 
 #------------ OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW --------------------#
     def mousePressEvent(self, event):
