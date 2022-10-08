@@ -4,6 +4,11 @@ NASA Astronomy Photo of the Day
 
 Example project for Intro to Computer Science 1 Think Aloud individual project.
 
+## Requirements
+ Python 3.10.7
+ - pip install pyside6
+ - pip install requests
+
 ## Project Plan
 - 09-20-22: Design UI in QTDesigner 
 - 09-20-22: Convert QT Designer file main_window.ui to main_ui.py
