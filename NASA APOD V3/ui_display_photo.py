@@ -24,7 +24,9 @@ class Ui_Dialog(object):
             Dialog.setObjectName(u"Dialog")
         Dialog.resize(637, 399)
         self.horizontalLayout = QHBoxLayout(Dialog)
+        self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.lbl_photo = QLabel(Dialog)
         self.lbl_photo.setObjectName(u"lbl_photo")
         self.lbl_photo.setLineWidth(0)
@@ -38,7 +40,7 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"NASA APOD", None))
         self.lbl_photo.setText("")
     # retranslateUi
 

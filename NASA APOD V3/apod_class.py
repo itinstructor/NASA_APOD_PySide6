@@ -9,6 +9,7 @@
 # Import the requests module
 import webbrowser
 from PySide6 import QtGui
+# pip install requests
 import requests
 from datetime import date
 from api_key import api_key
@@ -20,6 +21,7 @@ class APODClass:
         """Class to get NASA APOD data from API"""
         self._img = QtGui.QPixmap()
         self._hd_img = QtGui.QPixmap()
+        self._explanation = ""
 
     @property
     def img(self):
@@ -30,6 +32,11 @@ class APODClass:
     def hd_img(self):
         """HD image."""
         return self._hd_img
+
+    @property
+    def explanation(self):
+        """APOD photo explanation"""
+        return self._explanation
 
 #------------------------ GET DATA --------------------------------------------#
     def get_data(self, display_date):
@@ -70,7 +77,7 @@ class APODClass:
                 # Display the Python dictionary
                 print('\nJSON data converted to a Python dictionary:')
             self.get_photo()
-            return (self.response.get("explanation"))
+            self._explanation = self.response.get("explanation")
 
         else:
             print(f"API unavailable: {response.status_code}")
@@ -84,7 +91,7 @@ class APODClass:
         """
         # Get this property
         url = self.response["url"]
-
+        self._img = QtGui.QPixmap()
         # Is the response an image or a link to a video
         if self.response["media_type"] == "image":
             # Get the hdurl response
@@ -99,6 +106,6 @@ class APODClass:
 
         else:
             # We have a link to a video...open the video (try july 1st, 2020)
-            # self.lbl_thumbnail.config(image="")
+            self._img = None
             # self.lbl_thumbnail.config(text=url)
             webbrowser.open(url)
