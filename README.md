@@ -16,6 +16,7 @@ Example project for Intro to Computer Science 1 Think Aloud individual project.
 - 09-29-22: Calendar widget chooses that days APOD
 - 10-07-22: Show thumbnail of current day's APOD
 - 10-08-22: Display full photo
+- 10-08-22: Display image or YouTube video
 - Display hd photo
 - Click thumbnail to display full photo
 
