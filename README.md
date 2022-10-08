@@ -8,14 +8,22 @@ Example project for Intro to Computer Science 1 Think Aloud individual project.
 - Design UI in QTDesigner - 09-20-22
 - Convert QT Designer file main_window.ui to main_ui.py - 09-20-22
 - Get and display current day's APOD description - 09-29-22
-- Show thumbnail of current day's APOD
-- Click thumbnail to display larger image
-- Calendar widget chooses that days APOD
+- Calendar widget chooses that days APOD - 09-29-22
+- Show thumbnail of current day's APOD - 10-07-22
+- Display full photo - 10-08-22
+- Click thumbnail to display full photo
+
 
 ## Version History
+- (10-08-22) V3 Retrieve and display full photo.
+- (10-07-22) V2 Retrieve and display thumbnail.
 - (09-27-22) V1 Connect to NASA APOD API. Retrieve and display current APOD description.
 
 ## UI Design
+V3 GUI
+
+![](/images/gui_design_3.png)
+
 V1 GUI
 
 ![](/images/gui_design_1.png)

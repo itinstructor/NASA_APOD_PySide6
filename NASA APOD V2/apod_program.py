@@ -48,7 +48,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
 #--------------------- DISPLAY APOD -------------------------------------------#
     def display_data(self):
-        """Get and display APOD description and thumbnail on form label"""
+        """Get and display APOD description and thumbnail on form label."""
         # Get date from dateEdit widget
         temp_date = self.dateEdit.date()
         # Convert QDate to Python date
@@ -56,7 +56,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         self.lbl_description.setText(
             f"{self.apod_class.get_data(display_date)}")
         
-        img = self.apod_class.get_img()
+        img = self.apod_class.img
         self.lbl_thumbnail.setPixmap(img)
 
         self.lbl_thumbnail.setScaledContents(True)
