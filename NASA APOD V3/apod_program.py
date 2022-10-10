@@ -73,6 +73,10 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 #--------------------- DISPLAY APOD DATA --------------------------------------#
     def display_apod_data(self):
         """Get and display APOD description and thumbnail on form label."""
+        # Disable button while updating apod data
+        self.btn_display_apod.setEnabled(False)
+        # Process UI events to show new button state
+        QApplication.processEvents()
         # Get date from dateEdit widget
         temp_date = self.dateEdit.date()
         # Convert QDate to Python date
@@ -96,6 +100,11 @@ class APODViewer(QMainWindow, Ui_MainWindow):
             self.lbl_thumbnail.setScaledContents(True)
             # Set label size
             self.lbl_thumbnail.resize(225, 225)
+
+        # Enable button when done updating apod data
+        self.btn_display_apod.setEnabled(True)
+        # Process UI events to show new button state
+        QApplication.processEvents()
 
 #------------ OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW --------------------#
     def mousePressEvent(self, event):
