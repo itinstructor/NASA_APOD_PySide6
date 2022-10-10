@@ -13,12 +13,12 @@ import datetime
 # pip install pyside6
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QMainWindow, QDialog, QApplication
+from PySide6.QtWidgets import QMainWindow, QApplication
 # Import gui py file created by QT Designer
 from ui_main_window import Ui_MainWindow
-from ui_display_photo import Ui_Dialog
 # Import controller class that does all the work
 from apod_class import APODClass
+from apod_photo_dialog import PhotoDialog
 
 
 class APODViewer(QMainWindow, Ui_MainWindow):
@@ -26,6 +26,10 @@ class APODViewer(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(APODViewer, self).__init__()
         """NASA APOD Viewer"""
+        self.photo_dialog = PhotoDialog()
+        # Create apod_class object to access methods and properties
+        # APODClass does all the work on getting APOD data
+        self.apod_class = APODClass()
         # Create the GUI from Ui_MainWindow argument
         self.setupUi(self)
         # Remove title bar
@@ -33,20 +37,16 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
         # Set window title bar icon, shows in task bar
         my_icon = QIcon()
-        my_icon.addFile("telescope-32.png")
+        my_icon.addFile("telescope-icon-24300")
         self.setWindowIcon(my_icon)
 
         # Get today's date
         display_date = datetime.date.today()
         # Set dateEdit widget to today's date
         self.dateEdit.setDate(display_date)
-        # Create apod_class object to access methods and properties
-        # APODClass does all the work on getting APOD data
-        self.apod_class = APODClass()
 
         # Create an instance of the photo dialog gui
         # Used to show photo_dialog dialog for APOD photo
-        self.photo_dialog = photo_dialog()
 
         # Connect the clicked event/signal to the display_data handler/slot
         # Display APOD with button or return/enter keys
@@ -116,30 +116,6 @@ class APODViewer(QMainWindow, Ui_MainWindow):
     def mouseReleaseEvent(self, event):
         """Override the mouseReleaseEvent."""
         pass
-
-
-#--------------------- DISPLAY PHOTO DIALOG CLASS -----------------------------#
-class photo_dialog(QDialog):
-    def __init__(self, parent=None):
-        """Display NASA APOD in dialog box."""
-        super().__init__(parent)
-        self.photo_display_ui = Ui_Dialog()
-        self.photo_display_ui.setupUi(self)
-
-        # Set window title bar icon, shows in task bar
-        my_icon = QIcon()
-        my_icon.addFile("telescope-icon.png")
-        self.setWindowIcon(my_icon)
-
-        # Create reference to lbl_photo for use
-        # APODViewer class display_photo method to display image
-        self.photo_label = self.photo_display_ui.lbl_photo
-
-    def display_info(self):
-        """Display photo_dialog."""
-        # Show the dialog with exec()
-        # Blocks all other windows until this is closed
-        self.exec()
 
 
 #-------------------------- START APPLICATION ---------------------------------#
