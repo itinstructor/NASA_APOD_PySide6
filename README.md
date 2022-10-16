@@ -5,7 +5,8 @@ NASA Astronomy Photo of the Day
 Example project for Intro to Computer Science 1 Think Aloud Individual Project.
 
 ## Requirements
- Python 3.10.7
+ Python 3.10.8
+ PySide 6.4.0
  - pip install pyside6
  - pip install requests
 
