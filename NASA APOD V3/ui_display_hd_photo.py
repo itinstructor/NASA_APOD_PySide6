@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'display_photo.ui'
+## Form generated from reading UI file 'display_hd_photo.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.0
 ##
@@ -27,11 +27,11 @@ class Ui_Dialog(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.lbl_photo = QLabel(Dialog)
-        self.lbl_photo.setObjectName(u"lbl_photo")
-        self.lbl_photo.setLineWidth(0)
+        self.lbl_hd_photo = QLabel(Dialog)
+        self.lbl_hd_photo.setObjectName(u"lbl_hd_photo")
+        self.lbl_hd_photo.setLineWidth(0)
 
-        self.horizontalLayout.addWidget(self.lbl_photo)
+        self.horizontalLayout.addWidget(self.lbl_hd_photo)
 
 
         self.retranslateUi(Dialog)
@@ -41,6 +41,6 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"NASA APOD", None))
-        self.lbl_photo.setText("")
+        self.lbl_hd_photo.setText("")
     # retranslateUi
 

@@ -11,7 +11,7 @@
 import sys
 import datetime
 # pip install pyside6
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication
 # Import gui py file created by QT Designer
@@ -19,6 +19,7 @@ from ui_main_window import Ui_MainWindow
 # Import controller class that does all the work
 from apod_class import APODClass
 from apod_photo_dialog import PhotoDialog
+from apod_hd_photo_dialog import HdPhotoDialog
 
 
 class APODViewer(QMainWindow, Ui_MainWindow):
@@ -26,7 +27,11 @@ class APODViewer(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(APODViewer, self).__init__()
         """NASA APOD Viewer"""
+        # Create an instance of the photo dialog gui
+        # Used to show photo_dialog dialog for APOD photo
         self.photo_dialog = PhotoDialog()
+        self.photo_hd_dialog = HdPhotoDialog()
+
         # Create apod_class object to access methods and properties
         # APODClass does all the work on getting APOD data
         self.apod_class = APODClass()
@@ -34,7 +39,6 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         # Remove title bar
         self.setWindowFlag(Qt.FramelessWindowHint)
-
         # Set window title bar icon, shows in task bar
         my_icon = QIcon()
         my_icon.addFile("telescope-icon-24300")
@@ -45,36 +49,50 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Set dateEdit widget to today's date
         self.dateEdit.setDate(display_date)
 
-        # Create an instance of the photo dialog gui
-        # Used to show photo_dialog dialog for APOD photo
-
         # Connect the clicked event/signal to the display_data handler/slot
         # Display APOD with button or return/enter keys
         self.btn_display_apod.clicked.connect(self.display_apod_data)
         self.btn_display_apod.setShortcut("Return")
         self.btn_display_apod.setShortcut("Enter")
-        # Display photo in dialog
+
+        # Make label clickable by assiging a method to the
+        # mouseReleaseEvent
+        self.lbl_thumbnail.mouseReleaseEvent = self.display_photo
         self.btn_full_photo.clicked.connect(self.display_photo)
+        self.btn_hd_photo.clicked.connect(self.display_hd_photo)
 
         # Exit the program with button or escape key
         self.btn_exit.clicked.connect(self.close)
         self.btn_exit.setShortcut("Esc")
         # Display initial NASA APOD on startup
-        self.display_apod_data()
+        # Create QTimer to allow GUI a chance to start
+        timer = QTimer()
+        # After GUI has started, display apod data
+        timer.singleShot(500, self.display_apod_data)
 
 #--------------------- DISPLAY APOD -------------------------------------------#
-    def display_photo(self):
+    def display_photo(self, *args):
         """Display APOD in dialog box."""
         # Set APOD photo to label
         self.photo_dialog.photo_label.setPixmap(self.apod_class.img)
         # Display APOD photo dialog box
         self.photo_dialog.display_info()
 
+#--------------------- DISPLAY HD APOD -------------------------------------------#
+    def display_hd_photo(self, *args):
+        """Display HD APOD in dialog box."""
+        # Set APOD photo to label
+        self.photo_hd_dialog.photo_hd_label.setPixmap(self.apod_class.hd_img)
+        # Display APOD photo dialog box
+        self.photo_hd_dialog.display_info()
+
 #--------------------- DISPLAY APOD DATA --------------------------------------#
     def display_apod_data(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable button while updating apod data
         self.btn_display_apod.setEnabled(False)
+        self.btn_full_photo.setEnabled(False)
+        self.btn_hd_photo.setEnabled(False)
         # Process UI events to show new button state
         QApplication.processEvents()
         # Get date from dateEdit widget
@@ -103,6 +121,8 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
         # Enable button when done updating apod data
         self.btn_display_apod.setEnabled(True)
+        self.btn_full_photo.setEnabled(True)
+        self.btn_hd_photo.setEnabled(True)
         # Process UI events to show new button state
         QApplication.processEvents()
 

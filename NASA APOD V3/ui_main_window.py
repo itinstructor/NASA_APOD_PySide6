@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.3.2
+## Created by: Qt User Interface Compiler version 6.4.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -89,10 +89,25 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"NASA APOD Viewer", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"NASA APOD", None))
         self.lbl_explanation.setText("")
+#if QT_CONFIG(tooltip)
+        self.lbl_thumbnail.setToolTip(QCoreApplication.translate("MainWindow", u"Click to see Full Photo", None))
+#endif // QT_CONFIG(tooltip)
         self.lbl_thumbnail.setText("")
         self.groupBox.setTitle("")
+#if QT_CONFIG(tooltip)
+        self.dateEdit.setToolTip(QCoreApplication.translate("MainWindow", u"Pick a date to see an APOD", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.btn_display_apod.setToolTip(QCoreApplication.translate("MainWindow", u"Get NASA Astronomy Photo of the Day", None))
+#endif // QT_CONFIG(tooltip)
         self.btn_display_apod.setText(QCoreApplication.translate("MainWindow", u"Get APOD", None))
+#if QT_CONFIG(tooltip)
+        self.btn_full_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display full photo", None))
+#endif // QT_CONFIG(tooltip)
         self.btn_full_photo.setText(QCoreApplication.translate("MainWindow", u"Full Photo", None))
+#if QT_CONFIG(tooltip)
+        self.btn_hd_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display HD photo", None))
+#endif // QT_CONFIG(tooltip)
         self.btn_hd_photo.setText(QCoreApplication.translate("MainWindow", u"HD Photo", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi
