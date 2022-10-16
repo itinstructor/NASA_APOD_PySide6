@@ -2,7 +2,7 @@
 ## Project Description
 NASA Astronomy Photo of the Day
 
-Example project for Intro to Computer Science 1 Think Aloud individual project.
+Example project for Intro to Computer Science 1 Think Aloud Individual Project.
 
 ## Requirements
  Python 3.10.7
@@ -17,8 +17,10 @@ Example project for Intro to Computer Science 1 Think Aloud individual project.
 - 10-07-22: Show thumbnail of current day's APOD
 - 10-08-22: Display full photo
 - 10-08-22: Display image or YouTube video
-- Display hd photo
-- Click thumbnail to display full photo
+- 10-15-22: Display hd photo
+- 10-15-22: Click thumbnail to display full photo
+- 10-15-22: Add tooltips
+- 10-15-22: Add QTimer to allow GUI to show before getting initial APOD
 
 ## Version History
 - (10-08-22) V3 Retrieve and display full photo.
