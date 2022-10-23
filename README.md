@@ -24,7 +24,8 @@ Example project for Intro to Computer Science 1 Think Aloud Individual Project.
 - 10-15-22: Add QTimer to allow GUI to show before getting initial APOD
 
 ## Version History
-- (10-08-22) V3 Retrieve and display full photo.
+- (10-23-22) V4 Add retrieve random photo.
+- (10-08-22) V3 Retrieve and display full  and hd photo.
 - (10-07-22) V2 Retrieve and display thumbnail.
 - (09-27-22) V1 Connect to NASA APOD API. Retrieve and display current APOD description.
 
