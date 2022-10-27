@@ -11,7 +11,7 @@
 import sys
 import datetime
 # pip install pyside6
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer, QDate
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication
 # Import gui py file created by QT Designer
@@ -101,7 +101,8 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         display_date = temp_date.toPython()
         # Get display_date's APOD data
         self.apod_class.get_data(display_date)
-        # Display explanation in labe.
+
+        # Display explanation in label
         self.lbl_explanation.setText(
             f"{self.apod_class.explanation}")
 
@@ -132,21 +133,18 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
         self.apod_class.get_random_photo()
-        # Get date from dateEdit widget
-        #temp_date = self.dateEdit.date()
-        # Convert QDate to Python date
-        #display_date = temp_date.toPython()
-        # Get display_date's APOD data
-        # self.apod_class.get_data(display_date)
-        # Display explanation in labe.
+
+        # Display explanation in label
         self.lbl_explanation.setText(
             f"{self.apod_class.date}\n{self.apod_class.explanation}")
-
+        # Convert APOD date to QDate format
+        date = QDate.fromString(self.apod_class.date, "yyyy-MM-dd")
+        # Display QDate in DateEdit
+        self.dateEdit.setDate(date)
         if self.apod_class.img == None:
             # If there is not an image, it is a video
             self.lbl_thumbnail.setText("YouTube Video")
             self.btn_full_photo.setEnabled(False)
-
         else:
             self.btn_full_photo.setEnabled(True)
             # Set APOD photo to image on label
@@ -198,14 +196,18 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         pass
 
 
-#-------------------------- START APPLICATION ---------------------------------#
-# Create application object
-apod_viewer = QApplication(sys.argv)
-# Set a QT style
-apod_viewer.setStyle("Fusion")
-# Create program object
-window = APODViewer()
-# Make program visible
-window.show()
-# Execute the program, setup clean exit of program
-sys.exit(apod_viewer.exec())
+def main():
+    #-------------------------- START APPLICATION ---------------------------------#
+    # Create application object
+    apod_viewer = QApplication(sys.argv)
+    # Set a QT style
+    apod_viewer.setStyle("Fusion")
+    # Create program object
+    window = APODViewer()
+    # Make program visible
+    window.show()
+    # Execute the program, setup clean exit of program
+    sys.exit(apod_viewer.exec())
+
+
+main()
