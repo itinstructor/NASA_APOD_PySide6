@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QDialog
 from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 from ui_display_photo import Ui_Dialog
 
 #--------------------- DISPLAY PHOTO DIALOG CLASS -----------------------------#
@@ -9,6 +10,7 @@ class PhotoDialog(QDialog):
         super().__init__(parent)
         self.photo_display_ui = Ui_Dialog()
         self.photo_display_ui.setupUi(self)
+        self.setWindowFlag(Qt.FramelessWindowHint)
 
         # Set window title bar icon, shows in task bar
         my_icon = QIcon()

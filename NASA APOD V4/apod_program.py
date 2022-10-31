@@ -44,6 +44,15 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         my_icon.addFile("telescope-icon-24300")
         self.setWindowIcon(my_icon)
 
+        # Get screen object
+        screen = QApplication.primaryScreen()
+        # Get screen size
+        size = screen.size()
+        # Get screen width and height
+        self.screen_width = size.width()
+        self.screen_height = size.height()
+        # print(f"{self.screen_width} x {self.screen_height}")
+
         # Get today's date
         display_date = datetime.date.today()
         # Set dateEdit widget to today's date
@@ -83,8 +92,17 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 #--------------------- DISPLAY HD APOD ---------------------------------------#
     def display_hd_photo(self, *args):
         """Display HD APOD in dialog box."""
-        # Set APOD photo to label
-        self.photo_hd_dialog.photo_hd_label.setPixmap(self.apod_class.hd_img)
+        height = self.apod_class.hd_img.height()
+        if self.screen_height < height:
+            image = self.apod_class.hd_img.scaledToHeight(
+                self.screen_height - 40
+            )
+            self.photo_hd_dialog.photo_hd_label.setPixmap(image)
+        else:
+            # Set APOD photo to label
+            self.photo_hd_dialog.photo_hd_label.setPixmap(
+                self.apod_class.hd_img)
+
         # Display APOD photo dialog box
         self.photo_hd_dialog.display_info()
 
@@ -136,7 +154,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
         # Display explanation in label
         self.lbl_explanation.setText(
-            f"{self.apod_class.date}\n{self.apod_class.explanation}")
+            f"{self.apod_class.explanation}")
         # Convert APOD date to QDate format
         date = QDate.fromString(self.apod_class.date, "yyyy-MM-dd")
         # Display QDate in DateEdit
