@@ -6,19 +6,21 @@
     NASA Astronomy photo of the day
 """
 
-# Import the requests module
+# Import webbrowser to display youtube videos
 import webbrowser
 from PySide6 import QtGui
+# Import the requests module
 # pip install requests
 import requests
-from datetime import date
 from api_key import api_key
 IS_DEBUGGING = False
 
 
 class APODClass:
     def __init__(self):
-        """Class to get NASA APOD data from API"""
+        """Class to get NASA APOD data from API."""
+        # NASA APOD API URL
+        self.APOD_URL = "https://api.nasa.gov/planetary/apod"
         self._img = QtGui.QPixmap()
         self._hd_img = QtGui.QPixmap()
         self._explanation = ""
@@ -35,37 +37,34 @@ class APODClass:
 
     @property
     def explanation(self):
-        """APOD photo explanation"""
+        """APOD photo explanation."""
         return self._explanation
-    
+
     @property
     def date(self):
-        """APOD photo explanation"""
+        """APOD photo explanation."""
         return self._date
 
-#------------------------ GET DATA -------------------------------------------#
+# ------------------------ GET DATA -------------------------------------------#
     def get_data(self, display_date):
         """Get APOD data from API."""
-        # NASA APOD API URL
-        APOD_URL = "https://api.nasa.gov/planetary/apod"
-
         # Set up parameters for request
         parameters = {
-            'api_key': api_key,
-            'date': display_date
+            "api_key": api_key,
+            "date": display_date
         }
         # Use the requests.get() function
         # with the parameter of the URL, params, and timeout
         response = requests.get(
-            APOD_URL,
+            self.APOD_URL,
             params=parameters,
             timeout=3
         )
 
         # If the status_code is 200, successful connection and data
         if (response.status_code == 200):
-
-            # Convert the JSON data into a Python dictionary with key value pairs
+            # Convert the JSON data into
+            # Python dictionary with key value pairs
             self.response = response.json()
 
             # Used to debug process
@@ -81,6 +80,7 @@ class APODClass:
 
                 # Display the Python dictionary
                 print('\nJSON data converted to a Python dictionary:')
+            # Get data from APOD dictionary
             self.url = self.response.get("url")
             self.hdurl = self.response.get("hdurl")
             self._explanation = self.response.get("explanation")
@@ -91,13 +91,11 @@ class APODClass:
         else:
             print(f"API unavailable: {response.status_code}")
 
-#------------------------ GET RANDOM PHOTO -----------------------------------#
+# ------------------------ GET RANDOM PHOTO ---------------------------------#
     def get_random_photo(self):
         """Get APOD data from API."""
-        # NASA APOD API URL
-        APOD_URL = "https://api.nasa.gov/planetary/apod"
-
         # Set up parameters for request
+        # "count": 1 gets one random photo
         parameters = {
             "api_key": api_key,
             "count": 1
@@ -105,7 +103,7 @@ class APODClass:
         # Use the requests.get() function
         # with the parameter of the URL, params, and timeout
         response = requests.get(
-            APOD_URL,
+            self.APOD_URL,
             params=parameters,
             timeout=3
         )
@@ -141,7 +139,7 @@ class APODClass:
         else:
             print(f"API unavailable: {response.status_code}")
 
-#------------------------ GET PHOTO ------------------------------------------#
+# ------------------------ GET PHOTO ----------------------------------------#
     def get_photo(self):
         """Get the url from the request.
 

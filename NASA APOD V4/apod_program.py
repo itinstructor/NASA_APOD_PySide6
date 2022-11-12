@@ -18,6 +18,7 @@ from PySide6.QtWidgets import QMainWindow, QApplication
 from ui_main_window import Ui_MainWindow
 # Import controller class that does all the work
 from apod_class import APODClass
+# Import dialog boxes that display the photos
 from apod_photo_dialog import PhotoDialog
 from apod_hd_photo_dialog import HdPhotoDialog
 
@@ -26,9 +27,9 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         super(APODViewer, self).__init__()
-        """NASA APOD Viewer"""
+        """NASA APOD Viewer."""
         # Create an instance of the photo dialog gui
-        # Used to show photo_dialog dialog for APOD photo
+        # Used to show photo dialog dialog for APOD photos
         self.photo_dialog = PhotoDialog()
         self.photo_hd_dialog = HdPhotoDialog()
 
@@ -61,14 +62,16 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Connect the clicked event/signal to the display_data handler/slot
         # Display APOD with button or return/enter keys
         self.btn_display_apod.clicked.connect(self.display_apod_data)
+        # Set shortcut keys for display APOD buttons
         self.btn_display_apod.setShortcut("Return")
         self.btn_display_apod.setShortcut("Enter")
-
+        # Connect signal to display_random_apod photo handler/slot
         self.btn_random_photo.clicked.connect(self.display_random_apod)
 
-        # Make label clickable by assiging a method to the
-        # mouseReleaseEvent
+        # Make thumbnail label clickable by
+        # assiging a method to the mouseReleaseEvent
         self.lbl_thumbnail.mouseReleaseEvent = self.display_photo
+        # Connect buttons to display photo methods
         self.btn_full_photo.clicked.connect(self.display_photo)
         self.btn_hd_photo.clicked.connect(self.display_hd_photo)
 
@@ -79,34 +82,37 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Create QTimer to allow GUI a chance to start
         timer = QTimer()
         # After GUI has started, display apod data
+        # 500 ms delay before APOD photo is displayed
         timer.singleShot(500, self.display_apod_data)
 
-#--------------------- DISPLAY APOD ------------------------------------------#
+# --------------------- DISPLAY APOD ----------------------------------------#
     def display_photo(self, *args):
         """Display APOD in dialog box."""
-        # Set APOD photo to label
+        # Set APOD photo Pixmap to label
         self.photo_dialog.photo_label.setPixmap(self.apod_class.img)
         # Display APOD photo dialog box
         self.photo_dialog.display_info()
 
-#--------------------- DISPLAY HD APOD ---------------------------------------#
+# --------------------- DISPLAY HD APOD -------------------------------------#
     def display_hd_photo(self, *args):
         """Display HD APOD in dialog box."""
         height = self.apod_class.hd_img.height()
+        # If the height of the image is greater that the screen height
+        # downsize image to fit the screen height - 40 pixels
         if self.screen_height < height:
             image = self.apod_class.hd_img.scaledToHeight(
                 self.screen_height - 40
             )
             self.photo_hd_dialog.photo_hd_label.setPixmap(image)
         else:
-            # Set APOD photo to label
+            # Set APOD photo to label at normal size
             self.photo_hd_dialog.photo_hd_label.setPixmap(
                 self.apod_class.hd_img)
 
         # Display APOD photo dialog box
         self.photo_hd_dialog.display_info()
 
-#--------------------- DISPLAY APOD DATA -------------------------------------#
+# --------------------- DISPLAY APOD DATA -----------------------------------#
     def display_apod_data(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable buttons while updating apod data
@@ -132,7 +138,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         else:
             # Set APOD photo to image on label
             self.lbl_thumbnail.setPixmap(self.apod_class.img)
-            # Scale image to fit label
+            # Scale image to fit label for thumbnail
             self.lbl_thumbnail.setScaledContents(True)
             # Set label size
             self.lbl_thumbnail.resize(225, 225)
@@ -142,7 +148,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
 
-#--------------------- DISPLAY APOD DATA -------------------------------------#
+# --------------------- DISPLAY APOD DATA -----------------------------------#
     def display_random_apod(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable button while updating apod data
@@ -177,7 +183,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
 
-#--------------------- ENABLE BUTTONS ----------------------------------------#
+# --------------------- ENABLE BUTTONS --------------------------------------#
     def enable_buttons(self):
         self.btn_display_apod.setEnabled(True)
         self.btn_full_photo.setEnabled(True)
@@ -185,7 +191,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         self.btn_random_photo.setEnabled(True)
         self.btn_exit.setEnabled(True)
 
-#--------------------- DISABLE BUTTONS ---------------------------------------#
+# --------------------- DISABLE BUTTONS -------------------------------------#
     def disable_buttons(self):
         self.btn_display_apod.setEnabled(False)
         self.btn_full_photo.setEnabled(False)
@@ -193,7 +199,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         self.btn_random_photo.setEnabled(False)
         self.btn_exit.setEnabled(False)
 
-#----------- OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW --------------------#
+# ----------- OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW ------------------#
     def mousePressEvent(self, event):
         """Override the mousePressEvent."""
         # Store the current position of the mouse in previous position
@@ -215,7 +221,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
 
 def main():
-    #-------------------------- START APPLICATION ---------------------------------#
+    # -------------------------- START APPLICATION --------------------------#
     # Create application object
     apod_viewer = QApplication(sys.argv)
     # Set a QT style
