@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.0
+## Created by: Qt User Interface Compiler version 6.4.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -78,6 +78,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.btn_random_photo)
 
+        self.btn_save_file = QPushButton(self.groupBox)
+        self.btn_save_file.setObjectName(u"btn_save_file")
+
+        self.horizontalLayout.addWidget(self.btn_save_file)
+
         self.btn_exit = QPushButton(self.groupBox)
         self.btn_exit.setObjectName(u"btn_exit")
 
@@ -118,6 +123,7 @@ class Ui_MainWindow(object):
         self.btn_random_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display HD photo", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_random_photo.setText(QCoreApplication.translate("MainWindow", u"Random Photo", None))
+        self.btn_save_file.setText(QCoreApplication.translate("MainWindow", u"&Save Image", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi
 

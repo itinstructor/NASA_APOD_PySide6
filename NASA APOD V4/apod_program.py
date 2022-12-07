@@ -10,6 +10,7 @@
 
 import sys
 import datetime
+from tkinter import filedialog
 # pip install pyside6
 from PySide6.QtCore import Qt, QTimer, QDate
 from PySide6.QtGui import QIcon
@@ -65,19 +66,24 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Set shortcut keys for display APOD buttons
         self.btn_display_apod.setShortcut("Return")
         self.btn_display_apod.setShortcut("Enter")
+
         # Connect signal to display_random_apod photo handler/slot
         self.btn_random_photo.clicked.connect(self.display_random_apod)
 
         # Make thumbnail label clickable by
         # assiging a method to the mouseReleaseEvent
         self.lbl_thumbnail.mouseReleaseEvent = self.display_photo
+
         # Connect buttons to display photo methods
         self.btn_full_photo.clicked.connect(self.display_photo)
         self.btn_hd_photo.clicked.connect(self.display_hd_photo)
 
+        self.btn_save_file.clicked.connect(self.save_photo)
+
         # Exit the program with button or escape key
         self.btn_exit.clicked.connect(self.close)
         self.btn_exit.setShortcut("Esc")
+
         # Display initial NASA APOD on startup
         # Create QTimer to allow GUI a chance to start
         timer = QTimer()
@@ -85,7 +91,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # 500 ms delay before APOD photo is displayed
         timer.singleShot(500, self.display_apod_data)
 
-# --------------------- DISPLAY APOD ----------------------------------------#
+# --------------------- DISPLAY APOD ---------------------------------------#
     def display_photo(self, *args):
         """Display APOD in dialog box."""
         # Set APOD photo Pixmap to label
@@ -93,7 +99,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Display APOD photo dialog box
         self.photo_dialog.display_info()
 
-# --------------------- DISPLAY HD APOD -------------------------------------#
+# --------------------- DISPLAY HD APOD ------------------------------------#
     def display_hd_photo(self, *args):
         """Display HD APOD in dialog box."""
         height = self.apod_class.hd_img.height()
@@ -112,7 +118,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Display APOD photo dialog box
         self.photo_hd_dialog.display_info()
 
-# --------------------- DISPLAY APOD DATA -----------------------------------#
+# --------------------- DISPLAY APOD DATA ----------------------------------#
     def display_apod_data(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable buttons while updating apod data
@@ -148,7 +154,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
 
-# --------------------- DISPLAY APOD DATA -----------------------------------#
+# --------------------- DISPLAY APOD DATA ----------------------------------#
     def display_random_apod(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable button while updating apod data
@@ -183,23 +189,37 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
 
-# --------------------- ENABLE BUTTONS --------------------------------------#
+# ----------------------------- SAVE PHOTO ---------------------------------#
+    def save_photo(self):
+        """Save the image to file."""
+        save_name = filedialog.asksaveasfilename(
+            initialdir="./",
+            title="Save Image",
+            filetypes=(
+                ("JPEG", "*.jpg"),
+                ("All Files", "*.*"))
+        )
+        self.apod_class.hd_img.save(save_name + ".jpg")
+
+# --------------------- ENABLE BUTTONS -------------------------------------#
     def enable_buttons(self):
         self.btn_display_apod.setEnabled(True)
         self.btn_full_photo.setEnabled(True)
         self.btn_hd_photo.setEnabled(True)
         self.btn_random_photo.setEnabled(True)
+        self.btn_save_file.setEnabled(True)
         self.btn_exit.setEnabled(True)
 
-# --------------------- DISABLE BUTTONS -------------------------------------#
+# --------------------- DISABLE BUTTONS ------------------------------------#
     def disable_buttons(self):
         self.btn_display_apod.setEnabled(False)
         self.btn_full_photo.setEnabled(False)
         self.btn_hd_photo.setEnabled(False)
         self.btn_random_photo.setEnabled(False)
+        self.btn_save_file.setEnabled(False)
         self.btn_exit.setEnabled(False)
 
-# ----------- OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW ------------------#
+# ----------- OVERRIDE MOUSE EVENTS TO MOVE PROGRAM WINDOW -----------------#
     def mousePressEvent(self, event):
         """Override the mousePressEvent."""
         # Store the current position of the mouse in previous position
@@ -221,7 +241,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
 
 def main():
-    # -------------------------- START APPLICATION --------------------------#
+    # -------------------------- START APPLICATION -------------------------#
     # Create application object
     apod_viewer = QApplication(sys.argv)
     # Set a QT style

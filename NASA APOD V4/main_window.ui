@@ -172,6 +172,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="btn_save_file">
+       <property name="text">
+        <string>&amp;Save Image</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btn_exit">
        <property name="text">
         <string>Exit</string>
