@@ -174,7 +174,7 @@
      <item>
       <widget class="QPushButton" name="btn_save_file">
        <property name="text">
-        <string>&amp;Save Image</string>
+        <string>Save Image</string>
        </property>
       </widget>
      </item>

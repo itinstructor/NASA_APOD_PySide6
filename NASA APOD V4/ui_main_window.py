@@ -123,7 +123,7 @@ class Ui_MainWindow(object):
         self.btn_random_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display HD photo", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_random_photo.setText(QCoreApplication.translate("MainWindow", u"Random Photo", None))
-        self.btn_save_file.setText(QCoreApplication.translate("MainWindow", u"&Save Image", None))
+        self.btn_save_file.setText(QCoreApplication.translate("MainWindow", u"Save Image", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
     # retranslateUi
 
