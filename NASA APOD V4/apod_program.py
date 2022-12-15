@@ -10,11 +10,10 @@
 
 import sys
 import datetime
-from tkinter import filedialog
 # pip install pyside6
 from PySide6.QtCore import Qt, QTimer, QDate
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QMainWindow, QApplication
+from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog
 # Import gui py file created by QT Designer
 from ui_main_window import Ui_MainWindow
 # Import controller class that does all the work
@@ -192,14 +191,22 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 # ----------------------------- SAVE PHOTO ---------------------------------#
     def save_photo(self):
         """Save the image to file."""
-        save_name = filedialog.asksaveasfilename(
-            initialdir="./",
-            title="Save Image",
-            filetypes=(
-                ("JPEG", "*.jpg"),
-                ("All Files", "*.*"))
-        )
-        self.apod_class.hd_img.save(save_name + ".jpg")
+        # Convert jpg to PySide6 pixmap format
+        pixmap = QPixmap(self.apod_class.hd_img)
+        # Prompt the user for the filename
+        image_file, _ = QFileDialog.getSaveFileName(
+            self, "Save Image",
+            "",
+            "JPG (*.jpg)")
+        # If the filename and the image exists, save image
+        if image_file and self.apod_class.hd_img != None:
+            # Save the file using OpenCV's imwrite() function
+            pixmap.save(image_file)
+        else:
+            QMessageBox.information(
+                self, "Error",
+                "Unable to save image.", QMessageBox.Ok
+            )
 
 # --------------------- ENABLE BUTTONS -------------------------------------#
     def enable_buttons(self):
