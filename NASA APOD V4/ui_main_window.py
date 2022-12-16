@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.btn_full_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display full photo", None))
 #endif // QT_CONFIG(tooltip)
-        self.btn_full_photo.setText(QCoreApplication.translate("MainWindow", u"Full Photo", None))
+        self.btn_full_photo.setText(QCoreApplication.translate("MainWindow", u"Photo", None))
 #if QT_CONFIG(tooltip)
         self.btn_hd_photo.setToolTip(QCoreApplication.translate("MainWindow", u"Display HD photo", None))
 #endif // QT_CONFIG(tooltip)

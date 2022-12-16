@@ -28,8 +28,8 @@ class APODViewer(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(APODViewer, self).__init__()
         """NASA APOD Viewer."""
-        # Create an instance of the photo dialog gui
-        # Used to show photo dialog dialog for APOD photos
+        # Create an instance of the photo dialog gui's
+        # Used to ashow APOD photos
         self.photo_dialog = PhotoDialog()
         self.photo_hd_dialog = HdPhotoDialog()
 
@@ -153,7 +153,7 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         # Process UI events to show new button state
         QApplication.processEvents()
 
-# --------------------- DISPLAY APOD DATA ----------------------------------#
+# --------------------- DISPLAY RANDOM APOD DATA ---------------------------#
     def display_random_apod(self):
         """Get and display APOD description and thumbnail on form label."""
         # Disable button while updating apod data
@@ -200,9 +200,14 @@ class APODViewer(QMainWindow, Ui_MainWindow):
             "JPG (*.jpg)")
         # If the filename and the image exists, save image
         if image_file and self.apod_class.hd_img != None:
-            # Save the file using OpenCV's imwrite() function
+            # Save the file using Pixmap.save method
             pixmap.save(image_file)
+            QMessageBox.information(
+                self, "Success",
+                "Image saved.", QMessageBox.Ok
+            )
         else:
+            # Show user the image was not saved
             QMessageBox.information(
                 self, "Error",
                 "Unable to save image.", QMessageBox.Ok

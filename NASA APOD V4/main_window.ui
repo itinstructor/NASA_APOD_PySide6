@@ -147,7 +147,7 @@
         <string>Display full photo</string>
        </property>
        <property name="text">
-        <string>Full Photo</string>
+        <string>Photo</string>
        </property>
       </widget>
      </item>
