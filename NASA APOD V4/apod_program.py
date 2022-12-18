@@ -10,9 +10,10 @@
 
 import sys
 import datetime
+import PySide6
 # pip install pyside6
 from PySide6.QtCore import Qt, QTimer, QDate
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtGui import QIcon, QPixmap, QGuiApplication
 from PySide6.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog
 # Import gui py file created by QT Designer
 from ui_main_window import Ui_MainWindow
@@ -128,8 +129,13 @@ class APODViewer(QMainWindow, Ui_MainWindow):
         temp_date = self.dateEdit.date()
         # Convert QDate to Python date
         display_date = temp_date.toPython()
+
+        # Set busy cursor
+        QGuiApplication.setOverrideCursor(PySide6.QtGui.QCursor(Qt.WaitCursor))
         # Get display_date's APOD data
         self.apod_class.get_data(display_date)
+        # Reset cursor
+        QGuiApplication.restoreOverrideCursor()
 
         # Display explanation in label
         self.lbl_explanation.setText(
@@ -161,8 +167,13 @@ class APODViewer(QMainWindow, Ui_MainWindow):
 
         # Process UI events to show new button state
         QApplication.processEvents()
-        self.apod_class.get_random_photo()
 
+        # Set busy cursor
+        QGuiApplication.setOverrideCursor(PySide6.QtGui.QCursor(Qt.WaitCursor))
+        self.apod_class.get_random_photo()
+        # Reset cursor
+        QGuiApplication.restoreOverrideCursor()
+        
         # Display explanation in label
         self.lbl_explanation.setText(
             f"{self.apod_class.explanation}")
