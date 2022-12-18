@@ -11,6 +11,7 @@ Example project for Intro to Computer Science 1 Think Aloud Individual Project.
  - pip install requests
 
 ## Changes
+- 12-17-22: Add busy cursor when loading images from url
 - 12-06-22: Add Save File button to save hd image to file
 - 10-30-22: Resize HD photo to fit vertical size of screen
 - 10-23-22: Add random photo button
